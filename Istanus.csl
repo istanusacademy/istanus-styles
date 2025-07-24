@@ -2,15 +2,18 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" page-range-format="minimal" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Istanus - Vancouver (no et al.)</title>
-    <id>http://istanus.com/styles/istanus-vancouver</id>
-    <link href="http://istanus.com/styles/istanus-vancouver" rel="self"/>
+    <id>http://www.zotero.org/styles/istanus-vancouver</id>
+    <link href="http://www.zotero.org/styles/istanus-vancouver" rel="self"/>
     <link href="https://istanus.com/istanusjabs/about/submissions" rel="documentation"/>
     <category citation-format="numeric"/>
-    <summary>Vancouver-based numeric citation style for Istanus publications. Uses full author names and appends DOI or URL without trailing period. Book titles in italics</summary>
+    <category field="biology"/>
+    <category field="medicine"/>
+    <category field="science"/>
+    <summary>Vancouver-based numeric citation style for Istanus publications. Uses full author names and appends DOI or URL without trailing period. Book titles in italics.</summary>
     <updated>2025-07-23T08:00:00+00:00</updated>
-    <rights license="http://creativecommons.org/licenses/by-sa/3.0/"/>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
-<!-- Modified from original Vancouver style by Istanus Academy, 2025 -->
+
   <macro name="author">
     <names variable="author">
       <name initialize-with="" delimiter=", " delimiter-precedes-last="always" name-as-sort-order="all" sort-separator=" "/>
@@ -39,7 +42,7 @@
     <sort>
       <key variable="citation-number"/>
     </sort>
-    <layout prefix="(" suffix=")" delimiter=",">
+    <layout prefix="[" suffix="]" delimiter=",">
       <text variable="citation-number"/>
     </layout>
   </citation>
@@ -49,7 +52,8 @@
       <text variable="citation-number" suffix="."/>
       <text macro="author" suffix=". "/>
       <choose>
-        <!-- BOOK FORMAT -->
+
+        <!-- Books and similar -->
         <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
           <group delimiter=". ">
             <text variable="title" font-style="italic"/>
@@ -61,21 +65,23 @@
             <text macro="year-date"/>
           </group>
         </if>
-        <!-- CHAPTER / CONFERENCE PAPER -->
+
+        <!-- Chapter / Paper-Conference with editors and container-title -->
         <else-if type="chapter paper-conference" match="any">
-          <group delimiter=", ">
-            <group delimiter=". ">
-              <text variable="title"/>
-              <group>
-                <text term="in" text-case="sentence" suffix=": "/>
-                <names variable="editor"/>
-              </group>
-              <group delimiter=", ">
-                <text variable="container-title" form="short"/>
-                <text variable="volume" prefix="vol. "/>
-              </group>
+          <group delimiter=". ">
+            <text variable="title"/>
+            <group>
+              <text term="in" text-case="capitalize-first" suffix=": "/>
+              <names variable="editor">
+                <name initialize-with="" delimiter=", " delimiter-precedes-last="always"/>
+                <label form="short" prefix=", " text-case="lowercase"/>
+              </names>
             </group>
-            <text variable="publisher"/>
+            <text variable="container-title" font-style="italic"/>
+            <group delimiter=": ">
+              <text variable="publisher-place"/>
+              <text variable="publisher"/>
+            </group>
             <text macro="year-date"/>
             <group delimiter=" ">
               <label variable="page" form="short" plural="never"/>
@@ -83,7 +89,8 @@
             </group>
           </group>
         </else-if>
-        <!-- DEFAULT: ARTICLES -->
+
+        <!-- Journal articles and other -->
         <else>
           <group delimiter=":">
             <group delimiter=" ">
